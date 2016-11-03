@@ -1,0 +1,19 @@
+{
+  "name": "hn-pretty",
+  "version": "0.0.1",
+  "description": "Small webapp to make HN look nice, and to teach me better JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hjfitz/hn-pretty.git"
+  },
+  "author": "Harry Fitzgerald",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hjfitz/hn-pretty/issues"
+  },
+  "homepage": "https://github.com/hjfitz/hn-pretty#readme"
+}
