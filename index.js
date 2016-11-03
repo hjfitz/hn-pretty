@@ -10,8 +10,9 @@ function getHN() {
     parsedData = parsedData.slice(0,25);
     for (let id of parsedData) {
       var threadUrl = urlStart + id + urlEnd;
-      console.log(threadUrl);
-      var datas = getThread(threadUrl);
+      //console.log(threadUrl);
+      getThread(threadUrl);
+      //console.log(datas);
     }
   };
   xhr.open("GET", "https://hacker-news.firebaseio.com/v0/topstories.json", true);
@@ -23,10 +24,19 @@ function getThread(url) {
   xhr.onload = function() {
     var data = xhr.responseText;
     var parsedData = JSON.parse(data);
-    return parsedData;
+    console.log(parsedData);
+    parseData();
   };
   xhr.open("GET", url, false);
   xhr.send();
+}
+
+function parseData() {
+
+}
+
+function addToPage(data) {
+  
 }
 
 window.addEventListener("load", getHN());
