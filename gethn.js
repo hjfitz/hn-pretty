@@ -11,7 +11,8 @@ function getHN() {
     for (let id of parsedData) {
       var threadUrl = urlStart + id + urlEnd;
       //console.log(threadUrl);
-      getThread(threadUrl);
+      console.log(id);
+      getThread(threadUrl, id);
       //console.log(datas);
     }
   };
@@ -20,33 +21,35 @@ function getHN() {
 }
 
 //should merge in to getHN at some point...
-function getThread(url) {
+function getThread(url, urlId) {
   var xhr = new XMLHttpRequest();
   xhr.onload = function() {
     var data = xhr.responseText;
     var parsedData = JSON.parse(data);
     //console.log(parsedData);
-    parseData(parsedData);
+    parseData(parsedData, urlId);
   };
   xhr.open("GET", url, false);
   xhr.send();
 }
 
-function parseData(data) {
-  var title = data.title;
-  var url = data.url;
-  var score = parseInt(data.score);
-  var added = parseInt(data.time);
-  var dateAdded = new Date(added);
-  //Can I please learn how to parse time nicer
-  addToPage(title,url,score,dateAdded);
+function parseData(data, urlId) {
+  var
+    title = data.title,
+    url = data.url,
+    score = data.score,
+    comments = data.descendants,
+    commentUrl = "https://news.ycombinator.com/item?id=" + urlId
+  ;
+
+  addToPage(title,url,score,comments,commentUrl);
 }
 
-function addToPage(title,link,score,time) {
+function addToPage(title,link,score,commentCount,commentUrl) {
   var
    newLink          = document.createElement("a"),
    postScore        = document.createElement("p"),
-   timeAdded        = document.createElement("p"),
+   comments         = document.createElement("a"),
    postContainer    = document.createElement("div"),
    row              = document.createElement("div"),
    col              = document.createElement("div"),
@@ -58,7 +61,7 @@ function addToPage(title,link,score,time) {
   postContainer.id     = "post card";
   newLink.className   += "link";
   postScore.className += "score";
-  timeAdded.className += "time";
+  comments.className  += "comments";
   row.className        = "row";
   col.className        = "col s12 m12";
   card.className       = "card";
@@ -71,13 +74,14 @@ function addToPage(title,link,score,time) {
 
   postScore.textContent = "Score: " + score;
 
-  timeAdded.textContent = "Time Submitted: " + time;
+  comments.textContent = "Comments: " + commentCount;
+  comments.href = commentUrl;
 
   newLink.appendChild(titleS);
 
   content.appendChild(newLink);
   content.appendChild(postScore);
-  content.appendChild(timeAdded);
+  content.appendChild(comments);
 
   card.appendChild(content);
   col.appendChild(card);
@@ -86,3 +90,4 @@ function addToPage(title,link,score,time) {
   window.container.appendChild(row);
 }
 window.addEventListener("load", getHN());
+console.log("console works");

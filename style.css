@@ -1,0 +1,16 @@
+.link {
+  display:block;
+  margin-bottom: 20px;
+}
+
+.score {
+  display:inline;
+}
+
+.comments {
+  float:right;
+}
+
+.card .card-content {
+  padding: 30px!important;
+}
