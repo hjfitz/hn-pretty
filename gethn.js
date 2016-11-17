@@ -18,6 +18,7 @@ function getHN() {
   xhr.open("GET", "https://hacker-news.firebaseio.com/v0/topstories.json", true);
   xhr.send();
 }
+
 //should merge in to getHN at some point...
 function getThread(url) {
   var xhr = new XMLHttpRequest();
@@ -37,39 +38,51 @@ function parseData(data) {
   var score = parseInt(data.score);
   var added = parseInt(data.time);
   var dateAdded = new Date(added);
-  //dateAdded = dateAdded.setUTCSeconds(added);
-  //console.log(dateAdded);
-  //console.log(title);
+  //Can I please learn how to parse time nicer
   addToPage(title,url,score,dateAdded);
 }
 
 function addToPage(title,link,score,time) {
-  var heading          = document.createElement("h1");
-  var newLink          = document.createElement("a");
-  var postScore        = document.createElement("p");
-  var timeAdded        = document.createElement("p");
+  var
+   newLink          = document.createElement("a"),
+   postScore        = document.createElement("p"),
+   timeAdded        = document.createElement("p"),
+   postContainer    = document.createElement("div"),
+   row              = document.createElement("div"),
+   col              = document.createElement("div"),
+   card             = document.createElement("div"),
+   content          = document.createElement("div"),
+   titleS           = document.createElement("span")
+  ;
 
-  var postContainer    = document.createElement("div");
-  //var container        = window.container;
-
-  postContainer.id     = "post";
+  postContainer.id     = "post card";
   newLink.className   += "link";
   postScore.className += "score";
   timeAdded.className += "time";
+  row.className        = "row";
+  col.className        = "col s12 m12";
+  card.className       = "card";
+  content.className    = "card-content";
+  titleS.className     = "card-title";
 
-  heading.textContent = title;
+  titleS.textContent = title;
+
   newLink.href = link;
-  newLink.textContent = "link";
-  postScore.textContent = score;
-  timeAdded.textContent = time;
 
-  postContainer.appendChild(heading);
-  postContainer.appendChild(newLink);
-  postContainer.appendChild(postScore);
-  postContainer.appendChild(timeAdded);
+  postScore.textContent = "Score: " + score;
 
-  window.container.appendChild(postContainer);
-  console.log("oioi");
+  timeAdded.textContent = "Time Submitted: " + time;
+
+  newLink.appendChild(titleS);
+
+  content.appendChild(newLink);
+  content.appendChild(postScore);
+  content.appendChild(timeAdded);
+
+  card.appendChild(content);
+  col.appendChild(card);
+  row.appendChild(col);
+
+  window.container.appendChild(row);
 }
-
 window.addEventListener("load", getHN());

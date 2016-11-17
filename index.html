@@ -2,9 +2,15 @@
 <head>
   <meta chatset="utf-8">
   <meta name="theme-color" content="#ff6600">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>HN - Prettified</title>
   <link rel="stylesheet" href="style.css">
-  <script src="index.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script src="http://stevenlevithan.com/assets/misc/date.format.js"></script>
+  <script src="gethn.js"></script>
 </head>
 
 <body>
@@ -14,10 +20,17 @@
   </header>
 
   <nav>
-
+    <div class="nav-wrapper orange">
+      <a href="#" class="brand-logo center">HN Pretty</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="sass.html"></a></li>
+        <li><a href="badges.html"></a></li>
+        <li><a href="collapsible.html"></a></li>
+      </ul>
+    </div>
   </nav>
 
-  <main>
+  <main class="container">
     <div id=container>
     </div>
   </main>
